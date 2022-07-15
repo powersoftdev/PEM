@@ -1,0 +1,6 @@
+/* Validation */
+input.invalid.touched,
+select.invalid.touched{
+    border: 1px solid red;
+    box-shadow: inset 0 0 13 ;
+}
