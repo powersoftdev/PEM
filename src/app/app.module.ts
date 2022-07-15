@@ -13,8 +13,19 @@ import { DashboardComponent } from './Component/dashboard/dashboard.component';
 import { RegisterComponent } from './Auth/register/register.component';
 import { DesignationComponent } from './Common/designation/designation.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { TokenInterceptorService } from './Services/token-interceptor.service';
 
+
+import { DxButtonModule } from 'devextreme-angular';
+import { DxDataGridModule, DxTemplateModule } from 'devextreme-angular';
+import { ReportsComponent } from './Common/reports/reports.component';
+import { DxHtmlEditorModule, DxCheckBoxModule } from 'devextreme-angular';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { SearchFilterPipe } from './Filters/search-filter.pipe';
+//Search Filter
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+//For Paggination
+import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,14 +36,23 @@ import { TokenInterceptorService } from './Services/token-interceptor.service';
     DashboardComponent,
     DesignationComponent,
     SidebarComponent,
-    
-
+    ReportsComponent,
+    SearchFilterPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    DxButtonModule,
+    DxDataGridModule,
+    DxTemplateModule,
+    DxHtmlEditorModule,
+    DxCheckBoxModule,
+    BrowserAnimationsModule,
+    MatPaginatorModule,
+    Ng2SearchPipeModule,
+    NgxPaginationModule
   ],
   providers: [
     // {provide:HTTP_INTERCEPTORS,useClass:TokenInterceptorService,multi:true}
@@ -40,7 +60,5 @@ import { TokenInterceptorService } from './Services/token-interceptor.service';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  // constructor(private injector: Injector){}
-  // InjectorInstance = this.injector;
+  
  }
-// export let InjectorInstance: Injector;

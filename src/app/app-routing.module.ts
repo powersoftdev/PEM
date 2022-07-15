@@ -7,6 +7,7 @@ import { ForgotPasswordComponent } from './Auth/forgot-password/forgot-password.
 import { DashboardComponent } from './Component/dashboard/dashboard.component';
 import { AuthGuard } from './Guards/auth.guard';
 import { DesignationComponent } from './Common/designation/designation.component';
+import { ReportsComponent } from './Common/reports/reports.component';
 
 ForgotPasswordComponent
 const routes: Routes = [
@@ -15,21 +16,26 @@ const routes: Routes = [
     component: LoginComponent
   },
 
-  { 
-    path: 'register', 
+  {
+    path: 'register',
    component: RegisterComponent
   },
-  { 
-    path: 'forgetPassword', 
+  {
+    path: 'forgetPassword',
    component: ForgotPasswordComponent
   },
-  { 
-    path: 'dashboard', 
-   component: DashboardComponent,canActivate:[AuthGuard]
+  {
+    path: 'dashboard',
+   component: DashboardComponent,
+   canActivate:[AuthGuard]
   },
-  { 
-    path: 'designation', 
+  {
+    path: 'designation',
    component: DesignationComponent
+  },
+  {
+    path: 'reports',
+   component: ReportsComponent
   },
 ];
 

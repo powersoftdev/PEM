@@ -8,11 +8,13 @@ import { LoginService } from '../Services/login.service';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
+
+
   constructor(private service:LoginService){}
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Promise<boolean> {
     
-
-    return true;
+//Restrict to redirect dashboard page 
+    return this.service.isLoggedin();
   }
   
 }

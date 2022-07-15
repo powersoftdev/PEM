@@ -5,8 +5,9 @@ import { Designation } from 'src/app/Model/designation';
 import { DesignationService } from 'src/app/Services/designation.service';
 import { environment } from 'src/environments/environment';
 import { catchError, map, Observable, throwError, VirtualTimeScheduler } from 'rxjs';
-import{sweetAlertCls} from '../../Commons/sweetAlert'
-
+import Swal from 'sweetalert2';
+import { PageEvent } from '@angular/material/paginator';
+import { SwalService } from 'src/app/Services/AleartPopUp/swal.service';
 @Component({
   selector: 'app-designation',
   templateUrl: './designation.component.html',
@@ -16,21 +17,35 @@ export class DesignationComponent implements OnInit {
   @ViewChild('closeBtn') closeBtn: ElementRef;
   @ViewChild('closeupdatebtn') closeupdatebtn: any;
   @ViewChild('closedeletebtn') closedeletebtn: any;
+  public searchFilter: any = '';
+  public nameSearch: string = '';
+  // searchedKeyword: string;
+  searchKey: string = "";
+ 
+  // MatPaginator Inputs
+  length = 10;
+  pageSize = 10;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+
+  // MatPaginator Output
+  pageEvent: PageEvent;
+
   DesignationForm: FormGroup;
   editData: any;
- 
+  delData: any;
   desobj: Designation = new Designation();
+  //DesignationId: any;
+  // designationData: Array<any> = [];
+  designationData: any;
 
-  DesignationId: any;
-
-
-  designationData: Array<any> = [];
-
-  API_URL: string = environment.API_URL;
-  token: string = environment.loginToken;
+  // API_URL: string = environment.API_URL;
+  // token: string = environment.loginToken;
   // childModal: any;
-
-  constructor(private service: DesignationService, private formBuilder: FormBuilder, private http: HttpClient, private SwtAlt: sweetAlertCls ) {
+  count: number = 0;
+  tablesize: number = 15;
+  tablesizes: any = [10, 20, 50, 100, 150, 200, 250]
+  public page: any;
+  constructor(private service: DesignationService, private formBuilder: FormBuilder, private swalService: SwalService) {
     //Designation Form
     this.DesignationForm = this.formBuilder.group({
       companyId: new FormControl('', [Validators.required]),
@@ -44,15 +59,24 @@ export class DesignationComponent implements OnInit {
 
     });
   }
-
-  ngOnInit(): void {
+    ngOnInit(): void {
 
     this.getAll();
 
   }
+//#region Pagination
+  onTableDataChange(event: any) {
+    this.page = event;
+    this.getAll();
+  }
+  onTableSizeChange(event: any) {
+    this.tablesize = event.target.value;
+    this.page = 1;
+    this.getAll();
+  }
+//#endregion
 
-
-
+//#region Close Modal PopUp
   private closeModal(): void {
     this.closeBtn.nativeElement.click();
   }
@@ -62,42 +86,34 @@ export class DesignationComponent implements OnInit {
   private closeDeleteModal(): void {
     this.closedeletebtn.nativeElement.click();
   }
+//#endregion
 
+//#region Get All Designation
 
-
-  //Get Al Designation 
   getAll() {
     this.designationData = [];
     this.service.getAll().subscribe(res => {
       if (res.data != null) {
-        this.designationData.push(res.data);
-        console.log(this.designationData);
+        this.designationData = res.data;
+        console
       }
     }
-
     );
   }
+//#endregion
 
-  //Add Designation
+  //#region Add button  click  method
   Add() {
-    debugger;
     this.desobj.designationId = this.DesignationForm.value.designationId;
     this.desobj.designDescription = this.DesignationForm.value.designDescription;
-
     this.service.addAndEdit(this.desobj).subscribe(res => {
-
-      console.log("Success", this.desobj);
-      console.log("Response", res);
-      debugger;
       if (res.status == "Success") {
-        this.SwtAlt.SwalAlertMessage(true, "success", "Your Data Inserted Succusfully.", true, false);
+        this.swalService.SwalAlertMessage(true, "success", "Your Data Inserted Succusfully.", true, false);
         this.getAll();
         this.closeModal();
       }
       else
-        this.SwtAlt.SwalAlertMessage(false, "error", " Somethings wents wrong Please try again.", true, false);
-
-
+        this.swalService.SwalAlertMessage(false, "error", " Somethings wents wrong Please try again.", true, false);
     }, err => {
       console.log(err);
     });
@@ -105,12 +121,10 @@ export class DesignationComponent implements OnInit {
     this.DesignationForm.reset();
 
   }
-
+//#endregion
 
   //#region Edit button pancel click  method
   editDesignation(desModel: Designation) {
-    console.log(desModel);
-
     this.editData = desModel;
 
     this.DesignationForm.controls['designationId'].setValue(desModel.designationId);
@@ -122,7 +136,7 @@ export class DesignationComponent implements OnInit {
     this.DesignationForm.controls['lockedBy'].setValue(desModel.lockedBy);
     this.DesignationForm.controls['lockTs'].setValue(desModel.lockTs);
     this.DesignationForm.controls['branchCode'].setValue(desModel.branchCode);
-    // this.editData = desModel;
+
   }
 
   //#endregion
@@ -131,28 +145,24 @@ export class DesignationComponent implements OnInit {
   //#region  For Update Or Edit Designation
 
   Update() {
-    debugger;
+
     this.desobj.companyId = this.DesignationForm.value.companyId;
     this.desobj.divisionId = this.DesignationForm.value.divisionId;
     this.desobj.departmentId = this.DesignationForm.value.departmentId;
-
     this.desobj.designationId = this.DesignationForm.value.designationId;
     this.desobj.designDescription = this.DesignationForm.value.designDescription;
-
     this.desobj.lockedBy = this.DesignationForm.value.lockedBy;
     this.desobj.lockTs = this.DesignationForm.value.lockTs;
     this.desobj.branchCode = this.DesignationForm.value.branchCode;
 
     this.service.addAndEdit(this.desobj).subscribe(res => {
 
-      console.log("Success", this.desobj);
-
       if (res.status == "Success") {
-        this.SwtAlt.SwalAlertMessage(true, "Success", "Your Data Updated Successfully.",true,false);
+        this.swalService.SwalAlertMessage(true, "Success", "Your Data Updated Successfully.", true, false);
         this.getAll();
       }
       else
-        this.SwtAlt.SwalAlertMessage(false, "error", "Somethings wents wrong. Please try again.", true, false);
+        this.swalService.SwalAlertMessage(false, "error", "Somethings wents wrong. Please try again.", true, false);
 
       this.closeUpdateModal();
     });
@@ -165,20 +175,26 @@ export class DesignationComponent implements OnInit {
 
   //#region For Delete Designation
 
-  Delete(designationId: string) {
+  public DesId: any
+  deleteData(desModel: string) {
 
-    this.service.delete(designationId).subscribe(res => {
+    this.DesId = desModel
+
+  }
+
+
+  Delete(designationId: string) {
+    this.service.delete(this.DesId).subscribe(res => {
       if (res.status == "Success") {
-        this.SwtAlt.SwalAlertMessage(true, "Success", "Your Data Has Been Successfully Deleted.", true, true);
+        this.swalService.SwalAlertMessage(true, "Success", "Your Data is Deleted Successfully. ", true, false);
         this.getAll();
       }
       else
-        this.SwtAlt.SwalAlertMessage(false, "error", " You Can not Delete this Data. DesignationId Is Missing.", true, false);
-
+        this.swalService.SwalAlertMessage(false, "error", " You Can not Delete this Record. DesignationId Is Missing.", true, false);
       this.closeDeleteModal()
-
     });
   }
+
   //#endregion
-  
+
 }

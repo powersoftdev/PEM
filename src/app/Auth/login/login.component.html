@@ -2,8 +2,7 @@
   <form [formGroup]="loginForm">
     <div class="row g-3 align-items-center left">
       <h5 class="login"><u>Login</u></h5>
-
-
+ 
       <div class="col-auto">
         <label for="user" class="col-form-label"> User Name</label>
       </div>
@@ -28,20 +27,9 @@
           Password field is required.
         </div>
       </div>
-      <!-- <div class="col-auto">
-        <label for="Token" class="col-form-label"> Token</label>
-      </div>
-      <div>
-        <input  type="text" class="form-control center" 
-          formControlName="token" id="token"   [ngClass]="{'form-control': true, 'is-invalid': loginForm.get('token')?.invalid &&
-            (loginForm.get('token')?.dirty || loginForm.get('token')?.touched)}">
-        <div class="invalid-feedback">
-          Token field is required.
-        </div>
 
-      </div> -->
       <br>
-      <div class="d-grid gap-3 col-4  bottom-button">
+      <div class=" col-auto bottom-button">
 
         <button class="btn button-bg" type="submit" (click)="login(loginForm)">Login</button>
       </div>

@@ -8,5 +8,6 @@ export class Designation {
     lockTs: Date;
     branchCode: any; 
     data:string;
+  status: string;
 
 }   
