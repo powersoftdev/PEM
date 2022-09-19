@@ -8,3 +8,8 @@ select.invalid.touched{
 .mat-form-field {
     margin-right: 12px;
   }
+  .btn-primary{
+    background-color: #4005f2;
+    border-radius: 50px 50px;
+    color: #fff;
+  }

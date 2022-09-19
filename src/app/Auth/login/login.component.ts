@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import {  Router } from '@angular/router';
 import { User } from 'src/app/Model/user';
-import { LoginService } from 'src/app/Services/login.service';
+import { LoginService } from 'src/app/Services/LogInS/login.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
         .subscribe({
           next: data => {
             if (data.message == 'Success') {
-              console.log("Success", data.auth_token);
+              
               localStorage.setItem("token", data.auth_token);
               this.router.navigateByUrl('/dashboard')
             }

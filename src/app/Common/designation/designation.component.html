@@ -22,25 +22,25 @@
         </div>
         <!-- /Page Header -->
 
-        <!-- Search Filter -->
+       
         <div class="row filter-row">
             <div class="col-md-8"></div>
             <div class="col-md-4">
                 <div class="add-emp-section">
-                    <a class="btn btn-success btn-add-emp" data-bs-toggle="modal" data-bs-target="#add_designation"
-                        style="width: auto;"><i class="fas fa-plus"></i> Add
-                        Designations</a>
+                    <a class="btn btn-primary btn-add-emp" data-bs-toggle="modal" data-bs-target="#add_designation"
+                        style="width: auto;"><i class="fas fa-plus"></i> <b>Add Designation</b> </a>
                 </div>
             </div>
         </div>
-        <div class="col-md-8">
+         <!-- Search Filter -->
+        <!-- <div class="col-md-8">
             <input class="form-control center me-2" type="search" [(ngModel)]="searchKey" name="search" 
             placeholder="Search" aria-label="Search"> <br>
           <button class="btn btn-primary" type="submit">Search</button>
 
-        </div>
+        </div> -->
         <hr>
-        <!-- /Search Filter -->
+
 
 
         <div class="row">
@@ -48,7 +48,7 @@
             <div class="col-md-12">
 
                 <div class="table-responsive">
-                    <table class="table table-striped custom-table mb-0 ">
+                    <table class="table table-striped custom-table mb-0" datatable [dtOptions]="dataTable" [dtTrigger]="dtTrigger">
                         <thead>
                             <tr>
                                 <th>Sr. No</th>
@@ -60,8 +60,8 @@
                         </thead>
                         <tbody>
                             <tr
-                                *ngFor="let designation of designationData | paginate:{itemsPerPage:tablesize, currentPage: page, totalItems:count} |searchFilter:searchKey:'designDescription' let i = index">
-                                <td>{{tablesize *(page-1)+ i+1}}</td>
+                                *ngFor="let designation of designationData  let i = index">
+                                <td>{{ i+1}}</td>
                                 <td>{{designation.designationId}}</td>
                                 <td>{{designation.designDescription}}</td>
                                 <td class="text-end ico-sec d-flex justify-content-end">
@@ -79,15 +79,15 @@
         </div>
         <hr>
         <!-- Pagination -->
-        <div class="row" style="margin:0;">
+        <!-- <div class="row" style="margin:0;">
             <div class="col-md-12" style="text-align: center;">
                 <span>
                     <pagination-controls (pageChange)="onTableDataChange($event)"></pagination-controls>
                 </span>
             </div>
-        </div>
+        </div> -->
         <!-- Pagination -->
-        <!-- /Page Content -->
+    
 
         <!-- Add Designation Modal -->
         <div id="add_designation" class="modal custom-modal fade" role="dialog">
@@ -100,7 +100,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form [formGroup]="DesignationForm">
+                        <form [formGroup]="DesignationForm" (ngSubmit)="Add()">
                             <div class="form-group">
                                 <label>Designation Id <span class="text-danger">*</span></label>
                                 <input class="form-control" formControlName="designationId" type="text"
@@ -122,7 +122,7 @@
                             <div class="submit-section">
                                 <button class="btn btn-primary cancel-btn" data-bs-dismiss="modal"
                                     aria-label="Close">Cancel</button>
-                                <button class="btn btn-primary submit-btn" (click)="Add()">Submit</button>
+                                <button class="btn btn-primary submit-btn" type="submit" >Submit</button>
                             </div>
                         </form>
                     </div>
@@ -204,3 +204,24 @@
         <!-- /Delete Designation Modal -->
 
     </div>
+</div>
+
+
+    <!-- jQuery -->
+    <script src="assets/js/jquery-3.6.0.min.js"></script>
+		
+    <!-- Bootstrap Core JS -->
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Slimscroll JS -->
+    <script src="assets/js/jquery.slimscroll.min.js"></script>
+    
+    <!-- Select2 JS -->
+    <script src="assets/js/select2.min.js"></script>
+    
+    <!-- Datatable JS -->
+    <script src="assets/js/jquery.dataTables.min.js"></script>
+    <script src="assets/js/dataTables.bootstrap4.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="assets/js/app.js"></script>

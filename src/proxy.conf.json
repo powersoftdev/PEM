@@ -1,0 +1,12 @@
+{
+      "/api/*": {
+            "target": "https://powersoftrd.com/PEMAPI",
+            "secure": false,
+            "changeOrigin": true,
+            "logLevel": "info"
+           
+        }
+}
+
+
+   

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DesignationService } from '../Services/designation.service';
+import { DesignationService } from '../Services/DesignationS/designation.service';
 
 @Component({
   selector: 'app-sidebar',

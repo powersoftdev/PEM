@@ -2,12 +2,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, destroyPlatform, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Designation } from 'src/app/Model/designation';
-import { DesignationService } from 'src/app/Services/designation.service';
+import { DesignationService } from 'src/app/Services/DesignationS/designation.service';
 import { environment } from 'src/environments/environment';
-import { catchError, map, Observable, throwError, VirtualTimeScheduler } from 'rxjs';
+import { catchError, map, Observable, Subject, throwError, VirtualTimeScheduler } from 'rxjs';
 import Swal from 'sweetalert2';
 import { PageEvent } from '@angular/material/paginator';
-import { SwalService } from 'src/app/Services/AleartPopUp/swal.service';
+import { SwalService } from 'src/app/Services/AleartPopUpService/swal.service';
 @Component({
   selector: 'app-designation',
   templateUrl: './designation.component.html',
@@ -21,30 +21,23 @@ export class DesignationComponent implements OnInit {
   public nameSearch: string = '';
   // searchedKeyword: string;
   searchKey: string = "";
- 
-  // MatPaginator Inputs
-  length = 10;
-  pageSize = 10;
-  pageSizeOptions: number[] = [5, 10, 25, 100];
-
-  // MatPaginator Output
-  pageEvent: PageEvent;
 
   DesignationForm: FormGroup;
   editData: any;
   delData: any;
   desobj: Designation = new Designation();
-  //DesignationId: any;
+
   // designationData: Array<any> = [];
   designationData: any;
+  
+  dataTable: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject<any>();
+  
+  // count: number = 0;
+  // tablesize: number = 15;
+  // tablesizes: any = [10, 20, 50, 100, 150, 200, 250]
+  // public page: number = 1;
 
-  // API_URL: string = environment.API_URL;
-  // token: string = environment.loginToken;
-  // childModal: any;
-  count: number = 0;
-  tablesize: number = 15;
-  tablesizes: any = [10, 20, 50, 100, 150, 200, 250]
-  public page: any;
   constructor(private service: DesignationService, private formBuilder: FormBuilder, private swalService: SwalService) {
     //Designation Form
     this.DesignationForm = this.formBuilder.group({
@@ -59,24 +52,18 @@ export class DesignationComponent implements OnInit {
 
     });
   }
-    ngOnInit(): void {
+  ngOnInit(): void {
+    this.dataTable = {
+      pagingType: 'full_numbers',
+      pageLength: 10,
+      processing: true
+    };
 
     this.getAll();
 
   }
-//#region Pagination
-  onTableDataChange(event: any) {
-    this.page = event;
-    this.getAll();
-  }
-  onTableSizeChange(event: any) {
-    this.tablesize = event.target.value;
-    this.page = 1;
-    this.getAll();
-  }
-//#endregion
-
-//#region Close Modal PopUp
+ 
+  //#region Close Modal PopUp
   private closeModal(): void {
     this.closeBtn.nativeElement.click();
   }
@@ -86,22 +73,26 @@ export class DesignationComponent implements OnInit {
   private closeDeleteModal(): void {
     this.closedeletebtn.nativeElement.click();
   }
-//#endregion
+  //#endregion
 
-//#region Get All Designation
+  //#region Get All Designation
 
   getAll() {
     this.designationData = [];
     this.service.getAll().subscribe(res => {
       if (res.data != null) {
         this.designationData = res.data;
-        console
+        
       }
+      this.dtTrigger.next('');
     }
     );
   }
-//#endregion
-
+  //#endregion
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
+  }
   //#region Add button  click  method
   Add() {
     this.desobj.designationId = this.DesignationForm.value.designationId;
@@ -121,7 +112,7 @@ export class DesignationComponent implements OnInit {
     this.DesignationForm.reset();
 
   }
-//#endregion
+  //#endregion
 
   //#region Edit button pancel click  method
   editDesignation(desModel: Designation) {
@@ -175,12 +166,12 @@ export class DesignationComponent implements OnInit {
 
   //#region For Delete Designation
 
-  public DesId: any
-  deleteData(desModel: string) {
+    public DesId: any
+    deleteData(desModel: string) {
 
-    this.DesId = desModel
+      this.DesId = desModel
 
-  }
+    }
 
 
   Delete(designationId: string) {
