@@ -7,13 +7,13 @@
         <!-- Logo -->
         <div class="header-left">
             <a class="logo">
-                <img src="//src/assets/logo 1.PNG" width="40" height="40" alt="">
+                <img src="../../assets/logo 2.PNG" width="40" height="40" alt="">
             </a>
         </div>
         <!-- /Logo -->
 
         <div class="header-center">
-            <h1>Smarthr</h1>
+            <h1>PEM</h1>
         </div>
 
         <a id="toggle_btn" href="javascript:void(0);">
@@ -71,7 +71,7 @@
 
             <li>
                 <!-- Header Search -->
-                <!-- <div class="page-title-box">
+                <div class="page-title-box">
                     <div class="top-nav-search">
                         <a href="javascript:void(0);" class="responsive-search">
                             <i class="fa fa-search"></i>
@@ -79,7 +79,7 @@
                         <form action="search.html">
                             <input class="form-control" type="text" placeholder="Search">
 
-                            <div class="input-group mb-3">
+                            <!-- <div class="input-group mb-3">
                                 <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchTerm" name="search" (keyup)="search($event)" >
 
                                 <button class="btn btn-outline-secondary" type="button">    
@@ -88,10 +88,10 @@
                                     </span>
                                 </button>
 
-                            </div>
+                            </div> -->
                         </form>
                     </div>
-                </div> -->
+                </div>
                 <!-- /Header Search -->
             </li>
 
@@ -492,21 +492,34 @@
                     <p>Employees</p>
                     <ul>
                         <li><a href="employees.html">All Employees</a></li>
-                        <li><a href="holidays.html">Holidays</a></li>
-                        <li><a href="leaves.html">Leaves (Admin) <span
-                                    class="badge rounded-pill bg-primary float-end"></span></a></li>
+                        <!-- <li><a href="holidays.html">Holidays</a></li>
+                        <li><a routerLink="/leave">Leaves (Admin) </a></li>
                         <li><a href="leaves-employee.html">Leaves (Employee)</a></li>
                         <li><a href="leave-settings.html">Leave Settings</a></li>
                         <li><a href="attendance.html">Attendance (Admin)</a></li>
                         <li><a href="attendance-employee.html">Attendance (Employee)</a></li>
-                        <li><a href="departments.html">Departments</a></li>
+                        <li><a href="departments.html">Departments</a></li> -->
 
                         <li><a routerLink="/designation">Designations</a></li>
 
-                        <li><a href="timesheet.html">Timesheet</a></li>
-                        <li><a href="shift-scheduling.html">Shift & Schedule</a></li>
-                        <li><a href="overtime.html">Overtime</a></li>
+                        <!-- <li><a href="timesheet.html">Timesheet</a></li> -->
+                        <!-- <li><a href="shift-scheduling.html">Shift & Schedule</a></li> -->
+                        <!-- <li><a href="overtime.html">Overtime</a></li> -->
                         <li><a routerLink="/reports">Reports</a></li>
+                        <li><a routerLink="/payroll">Payroll Paytype</a></li>
+                        <!-- <li><a routerLink="/employee-detail-Reports">Employee Detail Reports</a></li> -->
+                        <!-- <li><a routerLink="/employee-summary-Reports">Employee Summary Reports</a></li> -->
+                        
+                        <li><a routerLink="/daily-Attendance-report">Daily Attendance Report</a></li>
+                         <li><a routerLink="/monthly-attendance-report">Monthly Attendance Report</a></li>
+
+                         <li><a routerLink="/lateness-detail-report">Lateness Detail Report</a></li>
+                         <li><a routerLink="/lateness-summary-report">Lateness Summary Report</a></li>
+
+                         <li><a routerLink="/absentee-details-report">Absentee Details Report</a></li>
+                         <li><a routerLink="/absentee-summary-report">Absentee Summary Report</a></li>
+
+                         <li><a routerLink="/deduction-report">Deduction Report</a></li>
                     </ul>
                 </div>
                 <div class="tab-pane fade" id="v-pills-clients" role="tabpanel" aria-labelledby="v-pills-clients-tab">
@@ -542,7 +555,7 @@
                         <li><a href="invoices.html">Invoices</a></li>
                         <li><a href="payments.html">Payments</a></li>
                         <li><a href="expenses.html">Expenses</a></li>
-                        <li><a href="provident-fund.html">Provident Fund</a></li>
+                        <li><a href="provident-fund.html">Provident Fund</a></li>  
                         <li><a href="taxes.html">Taxes</a></li>
                     </ul>
                 </div>
@@ -782,3 +795,24 @@
         </div>
     </div>
     <!-- Sidebar -->
+
+
+     <!-- jQuery -->
+     <script src="assets/js/jquery-3.6.0.min.js"></script>
+		
+     <!-- Bootstrap Core JS -->
+     <script src="assets/js/bootstrap.bundle.min.js"></script>
+     
+     <!-- Slimscroll JS -->
+     <script src="assets/js/jquery.slimscroll.min.js"></script>
+     
+     <!-- Select2 JS -->
+     <script src="assets/js/select2.min.js"></script>
+     
+     <!-- Datatable JS -->
+     <script src="assets/js/jquery.dataTables.min.js"></script>
+     <script src="assets/js/dataTables.bootstrap4.min.js"></script>
+     
+     <!-- Custom JS -->
+     <script src="assets/js/app.js"></script>
+ 

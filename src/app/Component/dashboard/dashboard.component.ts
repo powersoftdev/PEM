@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { LoginService } from 'src/app/Services/login.service';
+import { LoginService } from 'src/app/Services/LogInS/login.service';
 
 @Component({
   selector: 'app-dashboard',

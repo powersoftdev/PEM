@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DesignationService } from 'src/app/Services/designation.service';
+import { DesignationService } from 'src/app/Services/DesignationS/designation.service';
 import { exportDataGrid as XLSDataGrid } from 'devextreme/excel_exporter';
 import { exportDataGrid as PDFGrid } from 'devextreme/pdf_exporter';
 import { jsPDF } from 'jspdf';
