@@ -7,7 +7,9 @@ import { ForgotPasswordComponent } from './Auth/forgot-password/forgot-password.
 import { DashboardComponent } from './Component/dashboard/dashboard.component';
 import { AuthGuard } from './Guards/auth.guard';
 import { DesignationComponent } from './Common/designation/designation.component';
+import { LeaveComponent } from './Common/leave/leave.component';
 import { ReportsComponent } from './Common/reports/reports.component';
+
 
 ForgotPasswordComponent
 const routes: Routes = [
@@ -32,6 +34,10 @@ const routes: Routes = [
   {
     path: 'designation',
    component: DesignationComponent
+  },
+  {
+    path: 'leave',
+    component: LeaveComponent
   },
   {
     path: 'reports',

@@ -26,6 +26,7 @@ import { SearchFilterPipe } from './Filters/search-filter.pipe';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 //For Paggination
 import { NgxPaginationModule } from 'ngx-pagination';
+import { LeaveComponent } from './Common/leave/leave.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +38,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     DesignationComponent,
     SidebarComponent,
     ReportsComponent,
-    SearchFilterPipe
+    SearchFilterPipe,
+    LeaveComponent,
+    
   ],
   imports: [
     BrowserModule,
