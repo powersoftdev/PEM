@@ -31,7 +31,7 @@ export class TitleService {
 //For Get All Title Data
   public getAll(): Observable<Title> {
 
-    return this.http.get<Title>(this.API_URL + " " + this.token, this.requestOptions);
+    return this.http.get<Title>(this.API_URL + "/api/GetPayrollTitle/" + this.token, this.requestOptions);
 
   }
 
@@ -40,14 +40,14 @@ export class TitleService {
 
     const body = JSON.stringify(des);
 
-    return this.http.post<any>(this.API_URL + ' ' + this.token, body, this.requestOptions);
+    return this.http.post<any>(this.API_URL + '/api/AddPayrollTitle/' + this.token, body, this.requestOptions);
   }
 
 
   //For Title Update
   public update(Title: Title): Observable<Title> {
 
-    return this.http.post<Title>(this.API_URL + ' ' + this.token, this.requestOptions + Title.departmentId)
+    return this.http.post<Title>(this.API_URL + '/api/AddPayrollTitle/' + this.token, this.requestOptions + Title.departmentId)
       .pipe(
         map(() => Title)
       );
@@ -58,7 +58,7 @@ export class TitleService {
   public delete(titleId: string): Observable<any> {
     debugger;
 
-    return this.http.delete<any>(this.API_URL + ' ' + this.token + "?" + "TitleId=" + titleId, this.requestOptions);
+    return this.http.delete<any>(this.API_URL + '/api/DeletePayrollTitle/' + this.token + "?" + "TitleId=" + titleId, this.requestOptions);
   }
 
 

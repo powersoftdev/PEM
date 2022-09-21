@@ -10,11 +10,11 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="page-head-box">
-                    <h3>Title</h3>
+                    <h3>Leave</h3>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a routerLink="/dashboard">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Title</li>
+                            <li class="breadcrumb-item active" aria-current="page">Leave</li>
                         </ol>
                     </nav>
                 </div>
@@ -29,7 +29,7 @@
                 <div class="add-emp-section">
                     <a class="btn btn-success btn-add-emp" data-bs-toggle="modal" data-bs-target="#add_leave"
                         style="width: auto;"><i class="fas fa-plus"></i> Add
-                        Title</a>
+                        Leave</a>
                 </div>
             </div>
         </div>
@@ -52,9 +52,9 @@
                         <thead>
                             <tr>
                                 <th>Sr. No</th>
-                                <th>Title ID </th>
-                                <th>Title Description </th>
-                                <!-- <th>Payable</th> -->
+                                <th>Leave ID </th>
+                                <th>Leave Description </th>
+                                <th>Payable</th>
                                 <th class="text-end">Action</th>
                             </tr>
                         </thead>
@@ -64,7 +64,7 @@
                                 <td>{{tablesize *(page-1)+ i+1}}</td>
                                 <td>{{leave.leaveId}}</td>
                                 <td>{{leave.leaveDescription}}</td>
-                                <!-- <td>{{leave.payable}}</td> -->
+                                <td>{{leave.payable}}</td>
                                 <td class="text-end ico-sec d-flex justify-content-end">
                                     <a data-bs-toggle="modal" data-bs-target="#edit_leave"
                                         (click)="editLeave(leave)"><i class="fas fa-pen"></i></a>
@@ -95,7 +95,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Add Title</h5>
+                        <h5 class="modal-title">Add Leave</h5>
                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <i class="fas fa-times" #closeBtn></i>
                         </button>
@@ -103,7 +103,7 @@
                     <div class="modal-body">
                         <form [formGroup]="LeaveForm">
                             <div class="form-group">
-                                <label>Title Id <span class="text-danger">*</span></label>
+                                <label>Leave Id <span class="text-danger">*</span></label>
                                 <input class="form-control" formControlName="leaveId" type="text"
                                     [ngClass]="{'form-control': true, 'is-invalid': LeaveForm.get('leaveId')?.invalid &&
                             (LeaveForm.get('leaveId')?.dirty || LeaveForm.get('leaveId')?.touched)}">
@@ -112,7 +112,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Title Description <span class="text-danger">*</span></label>
+                                <label>Leave Description <span class="text-danger">*</span></label>
                                 <input class="form-control" formControlName="leaveDescription" type="text"
                                     [ngClass]="{'form-control': true, 'is-invalid': LeaveForm.get('leaveDescription')?.invalid &&
                             (LeaveForm.get('leaveDescription')?.dirty || LeaveForm.get('leaveDescription')?.touched)}">
@@ -120,15 +120,15 @@
                                     This field is required.
                                 </div>
                             </div>
-                            <!-- <div class="form-group">
-                                <label>Payable <span class="text-danger">*</span></label>
-                                <input class="form-control" formControlName="payable" type="text"
+                            <div class="form-group">
+                                <label>Payable<span class="text-danger">*</span></label>
+                                <input class="form-control" formControlName="Payable" type="text"
                                     [ngClass]="{'form-control': true, 'is-invalid': LeaveForm.get('payable')?.invalid &&
                             (LeaveForm.get('payable')?.dirty || LeaveForm.get('payable')?.touched)}">
                                 <div class="invalid-feedback">
                                     This field is required.
                                 </div>
-                            </div> -->
+                            </div>
                             <div class="submit-section">
                                 <button class="btn btn-primary cancel-btn" data-bs-dismiss="modal"
                                     aria-label="Close">Cancel</button>

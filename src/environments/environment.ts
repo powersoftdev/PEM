@@ -6,7 +6,8 @@
 
 export const environment = {
   production: false,
-  API_URL : 'https://powersofterp.com/PEMAPI',
+  API_URL : 'https://powersoftrd.com/PEMAPI',
+  // API_URL : 'https://powersofterp.com/TestPEMAPI',
 
   loginToken:'741258',
 
